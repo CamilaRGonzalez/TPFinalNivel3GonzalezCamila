@@ -2,41 +2,107 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+   <asp:UpdatePanel runat="server">
+        <ContentTemplate>   
+             <div class="container-fluid px-5 my-5">
+                 <!-- FILTROS-->
+                 <div style="margin-bottom:inherit;">
+                     <div class="row">
+                        <div class="col">
+                            <label class="form-label">Campo</label>
+                            <asp:DropDownList runat="server" AutoPostBack="true" ID="ddlCampo" 
+                             cssClass="form-select" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+                                <asp:ListItem selected="True">Todos</asp:ListItem>
+                                <asp:ListItem Value="Nombre"  Text="Nombre" />
+                                <asp:ListItem Value="C.Descripcion" Text="Categoría"/>
+                                <asp:ListItem Value="M.Descripcion" Text="Marca" />
+                                <asp:ListItem Value="Precio" Text="Precio" />
+                            </asp:DropDownList> 
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Criterio</label>
+                            <asp:DropDownList runat="server" ID="ddlCriterio" cssClass="form-select"></asp:DropDownList> 
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Filtro</label>
+                            <asp:TextBox runat="server"  CssClass="form-control" ID="txtFiltro" />  
+                            <%if(ddlCampo.SelectedValue == "Precio")
+                              {%>
+                                <asp:RegularExpressionValidator Display="Dynamic" ForeColor="Red" ValidationExpression="^[0-9]*\.?\,?[0-9]+$" ErrorMessage="Formato ##.## o ##,##" ControlToValidate="txtFiltro" runat="server"/>
+                                <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtFiltro" runat="server" />
+                            <%}
+                              else if(ddlCampo.SelectedValue == "Nombre")
+                              {%>
+                                 <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtFiltro" runat="server" />
+                            <%}%>
+                        </div>
+                         <div class="col">
+                             <label class="form-label" style="margin-top:17px;">  </label>
+                            <asp:Button Text="Filtrar" ID="btnFiltrar" CssClass="btn btn-primary form-control" runat="server" OnClick="btnFiltrar_Click" />                                
+                        </div>
+                      </div>
+                    </div>
+                 
+                 <!--Productos-->
+                <div id="contenedor_producto" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+                 
+                    <asp:Repeater runat="server" ID="repRepetidor">
+                        <ItemTemplate>
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <!-- Imagen-->                                  
+                                    <img class="card-img-top w-auto p-4" style="height:200px; align-self:center;" src="<%#Eval("UrlImg")%>" />                                                          
+                                    <!-- Detalles-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Nombre-->
+                                            <h5 class="fw-bolder"><%#Eval("Nombre")%></h5>
+                                            <!-- Precio-->
+                                            <h6 id="Precio"><%#Eval("Precio")%></h6>                                        
+                                        </div>
+                                    </div>
+                                    <!--Botones-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <asp:Button UseSubmitBehavior="false" OnClick="btnVerDetalle_Click" Text="Ver Detalle" CssClass="btn btn-outline-dark mt-auto" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ProductoId" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                                   
+               </div>
+            </div>
+            
+        </ContentTemplate>        
+    </asp:UpdatePanel>
+    
+    <script type="text/javascript">
+        formatear();
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(formatear);
+
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'))
+        myModal.show()
+
+        function formatear() {
+            const formatter = new Intl.NumberFormat('es-AR', {
+                style: 'currency',
+                currency: 'ARS',
+                minimumFractionDigits: 2
+            })
+
+            let tarjetas = document.querySelectorAll("#Precio");
+            let precio;
+
+            tarjetas.forEach((tarjeta) => {
+                precio = tarjeta.textContent;
+                precio = precio.replace(/,/g, '.');
+                tarjeta.textContent = formatter.format(precio);
+            })
+        }
+       
+    </script>
 
 </asp:Content>

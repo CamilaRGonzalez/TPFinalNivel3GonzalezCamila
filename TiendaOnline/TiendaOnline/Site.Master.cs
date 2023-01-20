@@ -13,5 +13,16 @@ namespace TiendaOnline
         {
 
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string busqueda = txtBuscar.Text;
+            Response.Redirect("Default.aspx?Busqueda=" + busqueda);
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
