@@ -9,6 +9,11 @@ namespace Dominio
 {
     public class Articulo
     {
+        public Articulo() 
+        {
+            this.Marca = new Caracteristica();
+            this.Categoria = new Caracteristica();
+        }
         public int Id { get; set; }
 
         [DisplayName("Código")]
