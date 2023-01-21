@@ -17,90 +17,57 @@ namespace TiendaOnline
         public CaracteristicaDB caractDB = new CaracteristicaDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            try
             {
                 if (Helper.tieneQueryString(this, "Busqueda"))
                 {
                     string busqueda = Request.QueryString["Busqueda"];
                     listaArt = Helper.filtroRapido(busqueda);
                 }
-                else
+
+                if (!IsPostBack)
                     listaArt = datos.ListarArticulos();
-            }                 
-            else
-            {
-                if(Session["ListaFiltrada"] != null)
-                {
+                else if (Session["ListaFiltrada"] != null)
                     listaArt = (List<Articulo>)Session["ListaFiltrada"];
-                }
                 else
-                    listaArt = datos.ListarArticulos();
+                   listaArt = datos.ListarArticulos();
+               
+                repRepetidor.DataSource = listaArt;
+                repRepetidor.DataBind();
             }
-                
-            repRepetidor.DataSource = listaArt;
-            repRepetidor.DataBind();
-            
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }            
         }
 
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string value = ddlCampo.SelectedValue;
-            txtFiltro.Text = "";
-            ddlCriterio.Items.Clear();
-            ddlCriterio.Enabled = true;
-            txtFiltro.Enabled = true;
+            HelperFiltros.limpiarCampos(ddlCriterio, txtFiltro);
 
-            if (value == "Precio")
-                Helper.llenarDdlPrecio(ddlCriterio);
-            else if (value == "Nombre")
-                ddlCriterio.Enabled = false;
-            else if (value == "M.Descripcion")
+            try
             {
-                HelperCaracteristica.llenarDDL(ddlCriterio, "marca");
-                txtFiltro.Enabled = false;
+                HelperFiltros.responderIndexChanged(ddlCampo, ddlCriterio, txtFiltro);
             }
-            else
+            catch (Exception ex)
             {
-                HelperCaracteristica.llenarDDL(ddlCriterio, "categoria");
+                Session.Add("error", ex.ToString());
             }
-
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string value = ddlCampo.SelectedValue;
-            string filtro;
-
-            if (value == "Precio")
-            {
-                filtro = txtFiltro.Text;
-                if (!(Helper.DecimalValido(filtro)) || filtro == "")
-                    return;
-
-                decimal num = Helper.parsearDecimal(filtro);
-                filtro = num.ToString(CultureInfo.CreateSpecificCulture("en-US"));
-                char operador = Helper.devolverOperador(ddlCriterio.SelectedItem.ToString());
-                listaArt = datos.FiltrarPrecio(operador, filtro);
+            try
+            {              
+                listaArt = HelperFiltros.obtenerFiltrados(ddlCampo, ddlCriterio, txtFiltro);
+                if(listaArt != null)
+                    Session.Add("ListaFiltrada", listaArt);
+                Page_Load(sender, e);
             }
-            else if (value == "Todos")
+            catch (Exception ex)
             {
-                listaArt = datos.ListarArticulos();
-            }
-            else if (value == "Nombre")
-            {
-                filtro = txtFiltro.Text;
-                if (filtro == "")
-                    return;
-                listaArt = datos.FiltrarFrase(filtro, value);
-            }
-            else
-            {
-                filtro = ddlCriterio.SelectedItem.ToString();
-                listaArt = datos.FiltrarFrase(filtro, value);
-            }
-
-            Session.Add("ListaFiltrada", listaArt);
-            Page_Load(sender, e);
+                Session.Add("error", ex.ToString());
+            }          
         }
 
         protected void btnVerDetalle_Click(object sender, EventArgs e)

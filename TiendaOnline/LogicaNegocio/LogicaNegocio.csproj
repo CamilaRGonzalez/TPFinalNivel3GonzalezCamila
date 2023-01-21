@@ -48,6 +48,7 @@
     <Compile Include="FavoritoDB.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HelperCaracteristica.cs" />
+    <Compile Include="HelperFiltros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDB.cs" />
     <Compile Include="Validaciones.cs" />
