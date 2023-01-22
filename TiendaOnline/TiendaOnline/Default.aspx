@@ -65,26 +65,64 @@
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
                                             <asp:Button UseSubmitBehavior="false" OnClick="btnVerDetalle_Click" Text="Ver Detalle" CssClass="btn btn-outline-dark mt-auto" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ProductoId" />
+                                            <%if (!user.admin) 
+                                              {%>
+                                                <asp:Button UseSubmitBehavior="false" OnClick="btnFav_Click" Text="🤍Fav" CssClass="btn btn-danger btn-sm m-2" ID="btnFav" CommandArgument='<%#Eval("Id")%>' CommandName="ProductoId" runat="server" />
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </ItemTemplate>
-                    </asp:Repeater>
-                                   
+                    </asp:Repeater>                                  
                </div>
             </div>
+
+        <%if (favorito)
+            {
+                string texto;
+                string imagen;
+                if (noRepetido)
+                {
+                    texto = "Agregado a favoritos exitosamente!";
+                    imagen = "/Imagenes/OK.jpg";
+                }
+                else
+                {
+                    texto = "Ya está en favoritos";
+                    imagen = "/Imagenes/advertencia.jpg";
+                }               
+              %>
+              <div class="modal" id="myModal" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body" style="text-align:center;">
+                            <img src="<%:imagen%>" height="100px" alt="Alternate Text" />
+                            <p><%:texto%>!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+               </div>
+          <%}%>
             
         </ContentTemplate>        
     </asp:UpdatePanel>
     
-    <script type="text/javascript">
-        formatear();
-
+    <script type="text/javascript">        
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(formatear);
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(mostrarModal);
 
-        var myModal = new bootstrap.Modal(document.getElementById('myModal'))
-        myModal.show()
+        formatear();
+        mostrarModal();
+
+        function mostrarModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'))
+            myModal.show()
+        }
+        
 
         function formatear() {
             const formatter = new Intl.NumberFormat('es-AR', {

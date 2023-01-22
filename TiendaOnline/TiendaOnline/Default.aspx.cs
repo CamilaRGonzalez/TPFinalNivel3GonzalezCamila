@@ -15,8 +15,12 @@ namespace TiendaOnline
         public List<Articulo> listaArt;
         private ArticuloDB datos = new ArticuloDB();
         public CaracteristicaDB caractDB = new CaracteristicaDB();
+        public User user;
+        public bool noRepetido = true;
+        public bool favorito = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            user = (User)Session["Usuario"];
             try
             {
                 if (Helper.tieneQueryString(this, "Busqueda"))
@@ -75,6 +79,16 @@ namespace TiendaOnline
             string valor = ((Button)sender).CommandArgument;
             string urlRuta = "Detalle.aspx?id=" + valor;
             Response.Redirect(urlRuta);
+        }
+
+        protected void btnFav_Click(object sender, EventArgs e)
+        {
+            
+            favorito = true;
+            string valor = ((Button)sender).CommandArgument;
+            int id = int.Parse(valor);
+            FavoritoDB datos = new FavoritoDB();
+            noRepetido = datos.AgregarFavorito(id,user.Id);                      
         }
     }
 }
