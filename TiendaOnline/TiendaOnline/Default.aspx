@@ -65,8 +65,8 @@
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
                                             <asp:Button UseSubmitBehavior="false" OnClick="btnVerDetalle_Click" Text="Ver Detalle" CssClass="btn btn-outline-dark mt-auto" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ProductoId" />
-                                            <%if (!user.admin) 
-                                              {%>
+                                            <%if (!user.admin)
+                                                {%>
                                                 <asp:Button UseSubmitBehavior="false" OnClick="btnFav_Click" Text="🤍Fav" CssClass="btn btn-danger btn-sm m-2" ID="btnFav" CommandArgument='<%#Eval("Id")%>' CommandName="ProductoId" runat="server" />
                                             <%}%>
                                         </div>
