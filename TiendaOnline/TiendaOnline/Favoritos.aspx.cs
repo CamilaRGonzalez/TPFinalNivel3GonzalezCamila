@@ -15,20 +15,34 @@ namespace TiendaOnline
         private FavoritoDB datos = new FavoritoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            usuario = (User)Session["Usuario"];
-            if (usuario == null)
-                return;
-            repRepetidor.DataSource = datos.listarFavoritos(usuario.Id);
-            repRepetidor.DataBind();
+            try
+            {
+                usuario = (User)Session["Usuario"];
+                if (usuario == null)
+                    return;
+                repRepetidor.DataSource = datos.listarFavoritos(usuario.Id);
+                repRepetidor.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }
         }
 
         protected void btnUnfav_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-            int id = int.Parse(valor);
-            datos.EliminarFavorito(id,usuario.Id);
-            repRepetidor.DataSource = datos.listarFavoritos(usuario.Id);
-            repRepetidor.DataBind();
+            try
+            {
+                string valor = ((Button)sender).CommandArgument;
+                int id = int.Parse(valor);
+                datos.EliminarFavorito(id, usuario.Id);
+                repRepetidor.DataSource = datos.listarFavoritos(usuario.Id);
+                repRepetidor.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }            
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace LogicaNegocio
         public bool RegistrarUsuario(string email, string pass)
         {
             AccesoDB datos = new AccesoDB();
-            int exito;
+
             try
             {
                 string query = "if not exists (select * from USERS where email = @email) begin insert into USERS (email,pass,admin) values (@email,@pass,0) end";
@@ -20,11 +21,7 @@ namespace LogicaNegocio
                 datos.InsertarParametro("@email", email);
                 datos.InsertarParametro("@pass", pass);
 
-                exito = datos.EjecutarAccion();
-
-                if (exito <= 0)
-                    return false;
-                return true;
+                return datos.EjecutarAccion() > 0;
             }
             catch (Exception ex)
             {
@@ -69,6 +66,31 @@ namespace LogicaNegocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public void ActualizarDatos(User user)
+        {
+            AccesoDB datos = new AccesoDB();
+ 
+            try
+            {
+                datos.HacerConsulta("update users set nombre=@nombre, apellido = @apellido, urlImagenPerfil=@urlimg where Id=@id");
+                datos.InsertarParametro("@nombre", user.nombre);
+                datos.InsertarParametro("@apellido", user.apellido);
+                datos.InsertarParametro("@urlimg", user.urlImagenPerfil ?? (object)DBNull.Value); //si user.urlImg no es null se envia el valor y si es null se envia null
+                datos.InsertarParametro("@id", user.Id);
+
+                datos.EjecutarAccion();
+                 
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
             finally
             {

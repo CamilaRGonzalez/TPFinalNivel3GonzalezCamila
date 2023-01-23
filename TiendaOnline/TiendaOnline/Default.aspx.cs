@@ -27,17 +27,15 @@ namespace TiendaOnline
                 {
                     string busqueda = Request.QueryString["Busqueda"];
                     listaArt = Helper.filtroRapido(busqueda);
+                    repRepetidor.DataSource = listaArt;
+                    repRepetidor.DataBind();
                 }
-
-                if (!IsPostBack)
+                else if (!IsPostBack)
+                {
                     listaArt = datos.ListarArticulos();
-                else if (Session["ListaFiltrada"] != null)
-                    listaArt = (List<Articulo>)Session["ListaFiltrada"];
-                else
-                   listaArt = datos.ListarArticulos();
-               
-                repRepetidor.DataSource = listaArt;
-                repRepetidor.DataBind();
+                    repRepetidor.DataSource = listaArt;
+                    repRepetidor.DataBind();
+                }              
             }
             catch (Exception ex)
             {
@@ -65,8 +63,10 @@ namespace TiendaOnline
             {              
                 listaArt = HelperFiltros.obtenerFiltrados(ddlCampo, ddlCriterio, txtFiltro);
                 if(listaArt != null)
-                    Session.Add("ListaFiltrada", listaArt);
-                Page_Load(sender, e);
+                {
+                    repRepetidor.DataSource = listaArt;
+                    repRepetidor.DataBind();
+                }              
             }
             catch (Exception ex)
             {

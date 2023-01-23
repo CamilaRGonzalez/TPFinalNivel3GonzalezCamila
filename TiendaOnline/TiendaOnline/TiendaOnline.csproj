@@ -118,10 +118,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ImagenesPerfil\Perfil-2.jpg" />
     <Content Include="Imagenes\advertencia.jpg" />
     <Content Include="Imagenes\OK.jpg" />
+    <Content Include="Imagenes\sin-imagen.jpg" />
+    <Content Include="Imagenes\usuario-avatar.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />

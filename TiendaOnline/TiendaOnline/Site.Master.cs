@@ -13,12 +13,18 @@ namespace TiendaOnline
     {
         public bool sesionActiva = false;
         public User usuario;
+        public string nombreUsuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             sesionActiva = Validaciones.sesionActiva(Session["Usuario"]);
+            
             if (sesionActiva)
             {
                 usuario = (User)Session["Usuario"];
+
+                nombreUsuario = usuario.nombre == null ? "Usuario" : usuario.nombre;
+
+                imgAvatar.ImageUrl = usuario.urlImagenPerfil == null ? "~/Imagenes/usuario-avatar.jpg" : "~/ImagenesPerfil/" + usuario.urlImagenPerfil;
 
                 if (sesionActiva && usuario.admin && (Page is Favoritos))
                 {

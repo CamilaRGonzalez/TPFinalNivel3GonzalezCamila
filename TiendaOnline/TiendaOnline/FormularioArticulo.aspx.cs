@@ -22,6 +22,7 @@ namespace TiendaOnline
 
             if (!IsPostBack) //para que no se vuelvan a cargar los ddl al hacer postback
             {
+
                 HelperCaracteristica.llenarDDL(ddlMarca, "marca");
                 HelperCaracteristica.llenarDDL(ddlCategoria, "categoria");
             }
@@ -29,19 +30,27 @@ namespace TiendaOnline
 
             if (Helper.tieneQueryString(this, "id"))
             {
-                idArticulo = int.Parse(Request.QueryString["id"]);
-                articulo = datos.ListarArticulos(idArticulo)[0];
+                try
+                {
+                    idArticulo = int.Parse(Request.QueryString["id"]);
+                    articulo = datos.ListarArticulos(idArticulo)[0];
 
-                if (IsPostBack) //para que no vuelva a cargar la info original al hacer postack (nunca se actualiza la info)
-                    return;
-                imgProducto.ImageUrl = articulo.UrlImg;
-                txtNombre.Text = articulo.Nombre;
-                txtDescripcion.Text = articulo.Descripcion;
-                txtPrecio.Text = articulo.Precio.ToString();
-                txtCodigo.Text = articulo.Codigo;
-                txtIMG.Text = articulo.UrlImg;
-                ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
-                ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+                    if (IsPostBack) //para que no vuelva a cargar la info original al hacer postack (nunca se actualiza la info)
+                        return;
+                    imgProducto.ImageUrl = articulo.UrlImg;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtCodigo.Text = articulo.Codigo;
+                    txtIMG.Text = articulo.UrlImg;
+                    ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
+                    ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", ex.ToString());
+                }
+                
             }
         }
 
@@ -70,20 +79,34 @@ namespace TiendaOnline
             art.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
             art.Marca.Id = int.Parse(ddlMarca.SelectedValue);
 
-            if (idArticulo == 0)
-                datos.AgregarArticulo(art);
-            else
+            try
             {
-                art.Id = idArticulo;
-                datos.ModificarArticulo(art);
+                if (idArticulo == 0)
+                    datos.AgregarArticulo(art);
+                else
+                {
+                    art.Id = idArticulo;
+                    datos.ModificarArticulo(art);
+                }
+                Response.Redirect("GestionArticulos.aspx");
             }
-            Response.Redirect("GestionArticulos.aspx");
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }          
         }
 
         protected void btnEliminarDef_Click(object sender, EventArgs e)
         {
-            datos.EliminarArticulo(articulo);
-            Response.Redirect("GestionArticulos.aspx");
+            try
+            {
+                datos.EliminarArticulo(articulo);
+                Response.Redirect("GestionArticulos.aspx");
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }           
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)

@@ -76,9 +76,9 @@
                         </ItemTemplate>
                     </asp:Repeater>                                  
                </div>
-            </div>
-
-        <%if (favorito)
+            </div> 
+            
+          <%if (favorito)
             {
                 string texto;
                 string imagen;
@@ -93,23 +93,25 @@
                     imagen = "/Imagenes/advertencia.jpg";
                 }               
               %>
-              <div class="modal" id="myModal" tabindex="-1">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-body" style="text-align:center;">
-                            <img src="<%:imagen%>" height="100px" alt="Alternate Text" />
-                            <p><%:texto%>!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  <div class="modal" id="myModal" tabindex="-1">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body" style="text-align:center;">
+                                <img src="<%:imagen%>" height="100" alt="Alternate Text" />
+                                <p><%:texto%></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-               </div>
+                   </div>
           <%}%>
-            
+
         </ContentTemplate>        
     </asp:UpdatePanel>
+
+            
     
     <script type="text/javascript">        
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(formatear);
@@ -119,11 +121,11 @@
         mostrarModal();
 
         function mostrarModal() {
-            var myModal = new bootstrap.Modal(document.getElementById('myModal'))
-            myModal.show()
+            $('#myModal').modal('show');
         }
         
 
+        
         function formatear() {
             const formatter = new Intl.NumberFormat('es-AR', {
                 style: 'currency',
@@ -142,5 +144,4 @@
         }
        
     </script>
-
 </asp:Content>
