@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
+        <script src="Scripts/jquery-3.4.1.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -56,8 +57,10 @@
                       else
                           titulo="Login";
                    %>
+
+
                 <div class="container m-5 mark bg-light">
-                    <div class="m-5">
+                    <div class="m-5">                      
                       <div class="row">
                           <div class="col">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -97,7 +100,48 @@
                     </div>
                   
                 </div>
-                <script>    
+
+             <!--MODAL-->
+            <%if(!(LogicaNegocio.Helper.tieneQueryString(this,"Registro") || LogicaNegocio.Helper.tieneQueryString(this,"Success") || LogicaNegocio.Helper.tieneQueryString(this,"salir")))
+              {%>
+                    <asp:UpdatePanel runat="server">
+                            <ContentTemplate>   
+                              <div class="modal" id="myModal" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content bg-light">
+                                        <div class="modal-body">
+                                            <div>   
+                                                <h6>Cuenta admin:</h6>
+                                                <p>Usuario: admin@admin.com <br />  
+                                                  Contraseña: admin
+                                                </p>
+                                            </div>
+                                            <div>   
+                                                <h6>Cuenta usuario:</h6>
+                                                <p>Usuario: user@user.com <br />    
+                                                   Contraseña: user
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">                                  
+                                            <button data-bs-dismiss="modal" class="btn btn-primary">Cerrar</button>
+                                        </div>                                            
+                                    </div>
+                                </div>
+                              </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+            <%}%>
+            
+                
+                
+                <script> 
+
+                    $(document).ready(function () {                   
+                          $('#myModal').modal('show');
+                    });
+                                     
+
                     function validar(){
                         document.querySelector("#txtMensajeError").textContent = "";
                         let txtEmail = document.querySelector("#txtEmail");

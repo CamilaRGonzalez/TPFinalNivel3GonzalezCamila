@@ -20,7 +20,7 @@
                         <div class="col-sm-4">                                         
                             <div class="mb-2">
                                 <label for="txtIMG" class="form-label">URL Imagen</label>
-                                <asp:TextBox runat="server" ID="txtIMG" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtIMG_TextChanged" />  
+                                <asp:TextBox runat="server" MaxLength="1000" ID="txtIMG" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtIMG_TextChanged" />  
                                 <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtIMG" runat="server" />
                             </div>
                             <div class="mb-2 border rounded">
@@ -31,17 +31,17 @@
                         <div class="col-sm-4">
                             <div class="mb-2">
                                 <label class="form-label">Código Art</label>
-                                <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control"/>
+                                <asp:TextBox runat="server" MaxLength="50" ID="txtCodigo" CssClass="form-control"/>
                                 <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtCodigo" runat="server" />
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Nombre</label>
-                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control"/>
+                                <asp:TextBox runat="server" ID="txtNombre" MaxLength="50" CssClass="form-control"/>
                                 <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtNombre" runat="server" />
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Descripcion</label>
-                                <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" Height="100px" CssClass="form-control"/>
+                                <asp:TextBox runat="server" ID="txtDescripcion" MaxLength="150" TextMode="MultiLine" Height="100px" CssClass="form-control"/>
                                 <asp:RequiredFieldValidator Display="Dynamic" ErrorMessage="Campo vacío" ForeColor="Red" ControlToValidate="txtDescripcion" runat="server" />
                             </div>
                         </div>

@@ -22,13 +22,6 @@ namespace TiendaOnline
             {   
                 dgvCateg.DataSource = datos.ListarCategorias();
                 dgvCateg.DataBind();
-                /*
-                if(Helper.tieneQueryString(this,"fallo"))
-                {
-                    id = int.Parse(Request.QueryString["fallo"]);
-                    abrirModal = true;
-                }
-                */
             }
         }
 
@@ -81,7 +74,7 @@ namespace TiendaOnline
             }
             else
             {
-                lblError.Text = "Repetido";
+                lblError.Text = "Ya existe la categoría " + txtCateg.Text;
                 abrirModal = true;
             }
                 
