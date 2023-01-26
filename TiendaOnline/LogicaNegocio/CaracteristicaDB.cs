@@ -29,6 +29,47 @@ namespace LogicaNegocio
 
         }
 
+        public bool agregarMarca(string marca)
+        {
+            try
+            {
+                consulta = "if not exists (select * from MARCAS where Descripcion = @marca) begin insert into MARCAS (Descripcion) values (@marca) end";
+                datos.HacerConsulta(consulta);
+                datos.InsertarParametro("@marca", marca);
+                return datos.EjecutarAccion() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+            
+        }
+
+        public bool modificarMarca(string marca, int id)
+        {
+            try
+            {
+                consulta = "if not exists (select * from MARCAS where Descripcion = @marca) begin update MARCAS set Descripcion = @marca where Id= @id end";
+                datos.HacerConsulta(consulta);
+                datos.InsertarParametro("@marca", marca);
+                datos.InsertarParametro("@id", id);
+                return datos.EjecutarAccion() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+            
+        }
+
         public List<Caracteristica> ListarCategorias()
         {
             List<Caracteristica> lista = new List<Caracteristica>();
@@ -39,7 +80,46 @@ namespace LogicaNegocio
             return lista;
 
         }
+        public bool agregarCategoria(string categ)
+        {
+            try
+            {
+                consulta = "if not exists (select * from CATEGORIAS where Descripcion = @categ) begin insert into CATEGORIAS (Descripcion) values (@categ) end";
+                datos.HacerConsulta(consulta);
+                datos.InsertarParametro("@categ", categ);
+                return datos.EjecutarAccion() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+            
+        }
 
+        public bool modificarCategoria(string categ, int id)
+        {
+            try
+            {
+                consulta = "if not exists (select * from CATEGORIAS where Descripcion = @categ) begin update CATEGORIAS set Descripcion = @categ where Id = @id end";
+                datos.HacerConsulta(consulta);
+                datos.InsertarParametro("@categ", categ);
+                datos.InsertarParametro("@id", id);
+                return datos.EjecutarAccion() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+            
+        }
         private void Listar(string consulta, List<Caracteristica> caractLista)
         {
             try

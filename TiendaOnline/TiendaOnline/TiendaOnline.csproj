@@ -113,6 +113,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="GestionArticulos.aspx" />
+    <Content Include="GestionCategorias.aspx" />
+    <Content Include="GestionMarcas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -191,6 +193,20 @@
     </Compile>
     <Compile Include="GestionArticulos.aspx.designer.cs">
       <DependentUpon>GestionArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionCategorias.aspx.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionCategorias.aspx.designer.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionMarcas.aspx.cs">
+      <DependentUpon>GestionMarcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionMarcas.aspx.designer.cs">
+      <DependentUpon>GestionMarcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
