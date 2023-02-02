@@ -12,6 +12,7 @@ namespace TiendaOnline
     public partial class Perfil : System.Web.UI.Page
     {
         private User usuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             usuario = (User)Session["Usuario"];

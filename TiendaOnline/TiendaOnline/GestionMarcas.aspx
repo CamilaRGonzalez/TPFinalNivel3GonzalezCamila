@@ -45,13 +45,13 @@
             string frase;
             if (id == 0)
             {
-                texto = "Agregar Categoría";
-                frase = "Nueva Categoría";
+                texto = "Agregar Marca";
+                frase = "Nueva Marca";
             }
             else
             {
-                texto = "Modificar Categoría";
-                frase = "Categoría";
+                texto = "Modificar Marca";
+                frase = "Marca";
             }               
             %>
                 <div class="modal" id="myModal" tabindex="-1">

@@ -40,7 +40,7 @@
 
         <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="Default.aspx">Sistema de Gestión</a>
+            <a class="navbar-brand ps-3" href="Default.aspx">Tienda Online</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -71,7 +71,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <div class="sb-sidenav-menu-heading">Navegación</div>
                             <a class="nav-link" href="Default.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Inicio
