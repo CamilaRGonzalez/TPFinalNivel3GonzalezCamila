@@ -34,6 +34,7 @@ namespace TiendaOnline
 
         protected void dgvCateg_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            dgvCateg.DataSource = datos.ListarMarcas();
             dgvCateg.PageIndex = e.NewPageIndex;
             dgvCateg.DataBind();
         }

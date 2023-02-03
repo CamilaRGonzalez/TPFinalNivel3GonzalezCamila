@@ -1,0 +1,6 @@
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\bin\Release\Dominio.dll
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\bin\Release\Dominio.pdb
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\obj\Release\Dominio.csproj.AssemblyReference.cache
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\obj\Release\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\obj\Release\Dominio.dll
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\Dominio\obj\Release\Dominio.pdb

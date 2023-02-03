@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,8 @@ namespace LogicaNegocio
 
         public AccesoDB()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
+            string cadena = ConfigurationManager.AppSettings["cadenaConexion"];
+            conexion = new SqlConnection(cadena);
             comando = new SqlCommand();
         }
 

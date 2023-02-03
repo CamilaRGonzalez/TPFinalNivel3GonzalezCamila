@@ -17,13 +17,13 @@ namespace TiendaOnline
         {
             try
             {
-                ArticuloDB datos = new ArticuloDB();
-                if (!IsPostBack)
+                if(!IsPostBack)
                 {
+                    ArticuloDB datos = new ArticuloDB();
                     dgvArticulos.DataSource = datos.ListarArticulos();
                     dgvArticulos.DataBind();
                 }
-              
+                           
             }
             catch (Exception ex)
             {
@@ -39,6 +39,8 @@ namespace TiendaOnline
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            ArticuloDB datos = new ArticuloDB();
+            dgvArticulos.DataSource = datos.ListarArticulos();
             dgvArticulos.PageIndex = e.NewPageIndex;
             dgvArticulos.DataBind();
         }
