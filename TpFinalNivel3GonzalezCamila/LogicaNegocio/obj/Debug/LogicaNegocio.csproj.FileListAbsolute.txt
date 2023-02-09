@@ -1,0 +1,9 @@
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\bin\Debug\LogicaNegocio.dll
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\bin\Debug\LogicaNegocio.pdb
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\bin\Debug\Dominio.dll
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\bin\Debug\Dominio.pdb
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\obj\Debug\LogicaNegocio.csproj.AssemblyReference.cache
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\obj\Debug\LogicaNegocio.csproj.CoreCompileInputs.cache
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\obj\Debug\LogicaNegocio.csproj.CopyComplete
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\obj\Debug\LogicaNegocio.dll
+C:\Users\camir\Music\ASP\Tienda-Online-Webforms\TiendaOnline\LogicaNegocio\obj\Debug\LogicaNegocio.pdb
