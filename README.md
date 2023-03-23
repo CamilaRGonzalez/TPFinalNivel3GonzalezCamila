@@ -5,21 +5,21 @@ Los usuarios pueden loguearse como clientes, pudiendo así ver los productos y s
 Los administradores se pueden loguear con sus credenciales correspondientes y así administrar los productos de la tienda, pudiendo agregar, modificar y 
 eliminar productos.
 
-Requerimientos
+<h2>Requerimientos</h2>
 Para correr este proyecto, necesitas tener instalado:
 
 Visual Studio 2019 o superior
 SQL Server 2016 o superior
 .NET Framework 4.8 
 
-Instalación
+<h2>Instalación</h2>
 Clona este repositorio en tu computadora.
 Crea una base de datos en SQL Server y ejecuta el script CATALOGO_WEB_DB.sql para crear la base de datos.
 Abre la solución del proyecto en Visual Studio.
 Modifica la cadena de conexión en el archivo Web.config para que apunte a tu base de datos.
 Compila y corre el proyecto.
 
-Uso
+<h2>Uso</h2>
 Entrar como administrador
 Usuario: admin@admin.com
 Contraseña: admin
