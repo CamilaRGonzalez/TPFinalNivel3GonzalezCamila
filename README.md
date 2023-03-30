@@ -1,4 +1,4 @@
-<h2>Tienda Virtual WinForms</h2>
+<h2>Tienda Virtual WebForms</h2>
 
 Este es un proyecto de una tienda virtual desarrollado en .NET Framework WebForms.</br>
 Los usuarios pueden loguearse como clientes, pudiendo así ver los productos y sus detalles, además de poder agregar productos a una lista de favoritos.</br>
